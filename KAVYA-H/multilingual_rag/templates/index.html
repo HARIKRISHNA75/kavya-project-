@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#07101d">
+    <title>Multilingual Document Q&amp;A</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="hero">
+            <div class="hero-art" aria-hidden="true">
+                <div class="orbit"></div>
+                <div class="globe"></div>
+                <div class="floating-page page-one"></div>
+                <div class="floating-page page-two"></div>
+            </div>
+            <h1><em>KAVYA-PROJECT</h1>
+            <p class="eyebrow">Retrieval-Augmented Generation</p>
+            <h1>Ask your documents, <em>in any language.</em></h1>
+            <p class="hero-copy">Upload PDF, DOCX or TXT files, ask a question in any language, and choose the language the answer is written in.</p>
+            <p id="indexSummary" class="index-summary" role="status">Checking indexed documents…</p>
+            <a class="start-link" href="#workspace">Start ↓</a>
+        </header>
+
+        <main id="workspace" class="workspace">
+            <section class="step-card" aria-labelledby="uploadTitle">
+                <h2 class="step-title" id="uploadTitle">
+                    <span class="step-number">1</span>
+                    Upload documents
+                </h2>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" multiple accept=".pdf,.docx,.txt" aria-label="Choose PDF, DOCX, or TXT files">
+                    <span class="upload-label">Choose files or drop them here</span>
+                    <span class="upload-hint">PDF, DOCX, TXT · up to 5 MB total per upload</span>
+                </div>
+                <div id="fileList" class="file-list" aria-live="polite"></div>
+                <button id="uploadBtn" class="action-button" type="button" disabled>Upload &amp; Process</button>
+                <p class="replace-note">Uploading replaces the documents currently in the index.</p>
+                <p id="uploadStatus" class="status" role="status" aria-live="polite"></p>
+            </section>
+
+            <section class="step-card" aria-labelledby="questionTitle">
+                <h2 class="step-title" id="questionTitle">
+                    <span class="step-number">2</span>
+                    Ask a question
+                </h2>
+                <div class="field-group">
+                    <label class="field-label" for="question">Question</label>
+                    <textarea id="question" rows="4" placeholder="e.g. What is the process described in the documents? / ఈ పత్రాలలో వివరించిన ప్రక్రియ ఏమిటి?"></textarea>
+                </div>
+                <div class="query-options">
+                    <div class="field-group">
+                        <label class="field-label" for="language">Answer language</label>
+                        <select id="language">
+                            <option value="en">English</option>
+                            <option value="te">Telugu (తెలుగు)</option>
+                            <option value="ml">Malayalam (മലയാളം)</option>
+                            <option value="ta">Tamil (தமிழ்)</option>
+                            <option value="hi">Hindi (हिन्दी)</option>
+                            <option value="kn">Kannada (ಕನ್ನಡ)</option>
+                            <option value="ur">Urdu (اردو)</option>
+                            <option value="es">Spanish</option>
+                            <option value="fr">French</option>
+                            <option value="de">German</option>
+                            <option value="zh">Chinese</option>
+                            <option value="ar">Arabic</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label" for="documentFilter">Search in</label>
+                        <select id="documentFilter">
+                            <option value="">All documents</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="runBtn" class="action-button" type="button" disabled>Run Retrieval</button>
+                <p id="queryStatus" class="status" role="status" aria-live="polite"></p>
+            </section>
+
+            <section class="step-card answer-card" aria-labelledby="answerTitle">
+                <h2 class="step-title" id="answerTitle">
+                    <span class="step-number">3</span>
+                    Answer
+                </h2>
+                <div id="answerBox" class="answer-box" aria-live="polite">
+                    <span class="answer-placeholder">Your answer appears here after you click <strong>Run Retrieval</strong>.</span>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
